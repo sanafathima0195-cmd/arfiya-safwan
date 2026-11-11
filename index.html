@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arfiya & Safwan | Wedding Invitation</title>
+  
+  <!-- Tailwind CSS Engine -->
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Cinzel:wght@400;600;700;800&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+    :root {
+      --oxblood: #531B29;
+      --oxblood-dark: #38101A;
+      --oxblood-light: #6E2638;
+      --ivory: #FAF6F0;
+      --ivory-card: #FFFEFB;
+      --gold-primary: #C9A050;
+      --gold-dark: #8C6A2B;
+      --olive-sage: #7B8A6F;
+      --olive-dark: #4E5A44;
+    }
+
+    .font-cormorant { font-family: 'Cormorant Garamond', Georgia, serif; }
+    .font-script { font-family: 'Great Vibes', cursive, 'Brush Script MT', sans-serif; }
+    .font-cinzel { font-family: 'Cinzel', Georgia, serif; }
+    .font-playfair { font-family: 'Playfair Display', Georgia, serif; }
+    .font-sans { font-family: 'Montserrat', system-ui, -apple-system, sans-serif; }
+
+    /* Botanical Palm Toile Wallpaper Background */
+    .bg-toile {
+      background-color: #FAF6F0;
+      background-image: 
+        radial-gradient(#E8DFD3 0.85px, transparent 0.85px),
+        radial-gradient(#E8DFD3 0.85px, #FAF6F0 0.85px);
+      background-size: 34px 34px;
+      background-position: 0 0, 17px 17px;
+    }
+
+    /* Deckle / Torn Paper Edge Effect */
+    .deckle-paper {
+      background: #FFFDF9;
+      position: relative;
+      box-shadow: 
+        0 4px 6px -1px rgba(60, 20, 30, 0.05),
+        0 18px 40px -10px rgba(70, 20, 30, 0.16),
+        0 0 0 1px rgba(210, 195, 180, 0.4);
+      border-radius: 3px;
+    }
+
+    .deckle-paper::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border: 1px dashed rgba(180, 150, 120, 0.25);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    /* Oxblood Envelope Styling */
+    .envelope-shadow {
+      box-shadow: 0 25px 55px -12px rgba(45, 10, 20, 0.4);
+    }
+
+    /* 3D Realistic Gold Wax Seal */
+    .wax-seal {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #FBF0BD 0%, #D4AF37 38%, #A87A1E 75%, #634307 100%);
+      box-shadow: 
+        0 8px 18px rgba(40, 10, 20, 0.45),
+        inset 0 2px 4px rgba(255, 255, 255, 0.7),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.55);
+      position: relative;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .wax-seal:hover {
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 
+        0 12px 24px rgba(40, 10, 20, 0.55),
+        inset 0 2px 4px rgba(255, 255, 255, 0.8),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.55);
+    }
+
+    .wax-seal-inner {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 235, 180, 0.6);
+      box-shadow: inset 0 2px 5px rgba(60, 40, 5, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Olive Serrated Stamp Badge */
+    .stamp-badge {
+      background: #7B8A6F;
+      color: #FAF6F0;
+      clip-path: polygon(
+        50% 0%, 57% 5%, 65% 1%, 71% 7%, 79% 5%, 84% 13%, 92% 13%, 95% 21%, 100% 24%, 100% 33%, 
+        100% 41%, 97% 50%, 100% 59%, 100% 67%, 100% 76%, 95% 79%, 92% 87%, 84% 87%, 79% 95%, 
+        71% 93%, 65% 99%, 57% 95%, 50% 100%, 43% 95%, 35% 99%, 29% 93%, 21% 95%, 16% 87%, 
+        8% 87%, 5% 79%, 0% 76%, 0% 67%, 0% 59%, 3% 50%, 0% 41%, 0% 33%, 0% 24%, 5% 21%, 
+        8% 13%, 16% 13%, 21% 5%, 29% 7%, 35% 1%, 43% 5%
+      );
+    }
+
+    /* BUTTERY-SMOOTH ENVELOPE OPENING ANIMATION */
+    .envelope-scene {
+      perspective: 1200px;
+    }
+
+    .envelope-flap {
+      transform-origin: top center;
+      transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1), z-index 0.2s ease;
+      backface-visibility: visible;
+    }
+
+    .envelope-card-insert {
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+    }
+
+    /* When envelope is opened */
+    .envelope-open .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1 !important;
+    }
+
+    .envelope-open .envelope-card-insert {
+      transform: translateY(-90px);
+      box-shadow: 0 20px 40px -10px rgba(50, 15, 25, 0.3);
+    }
+
+    .envelope-open .wax-seal {
+      transform: scale(0.65) translateY(-30px);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Subtle pulse on seal */
+    @keyframes sealGlow {
+      0%, 100% { filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.35)); }
+      50% { filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.85)); }
+    }
+    .seal-pulse {
+      animation: sealGlow 2.8s ease-in-out infinite;
+    }
+
+    /* Audio Equalizer Bars */
+    @keyframes eqBar {
+      0%, 100% { height: 4px; }
+      50% { height: 14px; }
+    }
+    .eq-bar-1 { animation: eqBar 0.8s ease-in-out infinite; }
+    .eq-bar-2 { animation: eqBar 0.6s ease-in-out infinite 0.2s; }
+    .eq-bar-3 { animation: eqBar 0.9s ease-in-out infinite 0.4s; }
+  </style>
+</head>
+<body class="bg-toile text-[#2D1B22] font-cormorant antialiased min-h-screen relative selection:bg-[#531B29] selection:text-amber-100">
+
+  <!-- ============================================== -->
+  <!-- AUDIO ELEMENT: EXACT SONG FROM USER'S REEL -->
+  <!-- ============================================== -->
+  <audio id="weddingAudio" src="wedding_song.mp3" loop preload="auto"></audio>
+
+  <!-- ============================================== -->
+  <!-- FLOATING AUDIO CONTROLLER & HAMPER SPOT PILL -->
+  <!-- ============================================== -->
+  <div class="fixed top-4 right-4 z-50 flex items-center gap-2">
+    <!-- Music Button -->
+    <button id="musicBtn" onclick="toggleAudio()" class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-[#C9A050]/50 shadow-md text-xs font-sans font-semibold text-[#531B29] hover:bg-[#531B29] hover:text-white transition-all active:scale-95">
+      <!-- Equalizer Bars -->
+      <div id="eqBars" class="flex items-center gap-0.5 h-3.5 hidden">
+        <span class="w-0.5 bg-amber-500 rounded-full eq-bar-1 h-2"></span>
+        <span class="w-0.5 bg-amber-500 rounded-full eq-bar-2 h-3.5"></span>
+        <span class="w-0.5 bg-amber-500 rounded-full eq-bar-3 h-2.5"></span>
+      </div>
+      <span class="w-2 h-2 rounded-full bg-stone-400" id="musicDot"></span>
+      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+      <span id="musicStatus">Music: Off</span>
+    </button>
+
+    <!-- Hamper Spot Pill -->
+    <a href="https://www.instagram.com/hamper.spot?vrfl=aG1zZnZma3k3bDJi&utm_source=qr" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#531B29] text-amber-200 text-xs font-sans font-semibold shadow-md hover:bg-[#38101A] transition-all">
+      <span>@hamper.spot</span>
+    </a>
+  </div>
+
+  <!-- Main Scrollable Container (Mobile-Optimized Like The Reel) -->
+  <main class="max-w-md sm:max-w-xl mx-auto px-4 py-8 flex flex-col items-center">
+
+    <!-- ============================================== -->
+    <!-- 1. ENVELOPE & WAX SEAL COVER (EXACT AS IN REEL) -->
+    <!-- ============================================== -->
+    <section id="envelopeSection" class="w-full flex flex-col items-center text-center pt-4 pb-12">
+      
+      <!-- Top Names Header in graceful cursive -->
+      <h1 class="font-script text-4xl sm:text-5xl text-[#531B29] tracking-wide mb-1">
+        Arfiya & Safwan
+      </h1>
+      <!-- Top Date -->
+      <p class="font-cinzel text-xs tracking-[0.35em] text-[#8C6A2B] uppercase font-bold mb-8">
+        29 . 11 . 2026
+      </p>
+
+      <!-- Envelope Frame Container -->
+      <div id="envelopeWrapper" class="envelope-scene relative w-[300px] sm:w-[340px] h-[390px] sm:h-[430px] flex items-center justify-center">
+        
+        <!-- The Oxblood Envelope Body -->
+        <div class="relative w-full h-full bg-[#531B29] rounded-2xl envelope-shadow overflow-hidden flex flex-col justify-between p-4 border border-[#7D293E]/40">
+          
+          <!-- Inner Envelope Liner: Elegant Arched Illustration of Wedding Venue / Palms -->
+          <div id="envelopeCardInsert" class="envelope-card-insert relative w-full h-[225px] rounded-t-full bg-gradient-to-b from-[#F2ECE1] to-[#E5DAC8] border-2 border-[#C9A050]/60 overflow-hidden shadow-inner flex flex-col items-center justify-center p-3 z-10">
+            
+            <!-- Arched Vintage Palm Trees & Venue Graphic -->
+            <svg viewBox="0 0 200 160" class="w-full h-full opacity-85">
+              <defs>
+                <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#EBE3D3"/>
+                  <stop offset="60%" stop-color="#DFD2BD"/>
+                  <stop offset="100%" stop-color="#C7B499"/>
+                </linearGradient>
+              </defs>
+              <rect width="200" height="160" fill="url(#skyGrad)"/>
+              <!-- Mountains in distance -->
+              <path d="M0,130 Q50,90 100,120 T200,110 L200,160 L0,160 Z" fill="#B5A48B" opacity="0.6"/>
+              <!-- Venue building silhouette -->
+              <rect x="70" y="85" width="60" height="45" fill="#FAF6EE" stroke="#A89476" stroke-width="1"/>
+              <path d="M65,85 L100,55 L135,85 Z" fill="#531B29" opacity="0.9"/>
+              <circle cx="100" cy="72" r="5" fill="#C9A050"/>
+              <rect x="92" y="105" width="16" height="25" rx="8" fill="#531B29"/>
+              <!-- Palm Trees -->
+              <path d="M35,145 Q40,90 32,55 Q42,50 55,60 M32,55 Q35,40 20,45 M32,55 Q20,60 12,70 M32,55 Q10,50 18,35 M32,55 Q30,30 40,32" fill="none" stroke="#4E5A44" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M165,145 Q160,95 168,60 Q158,55 145,65 M168,60 Q165,45 180,50 M168,60 Q180,65 188,75 M168,60 Q190,55 182,40" fill="none" stroke="#4E5A44" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+
+            <!-- Arched Text in Illustration -->
+            <div class="absolute bottom-2 text-center">
+              <span class="font-cinzel text-[9px] tracking-widest text-[#531B29] font-bold uppercase block">KMS Convention Centre</span>
+              <span class="font-cormorant italic text-[11px] text-[#4E5A44] font-medium">Mangalore</span>
+            </div>
+
+          </div>
+
+          <!-- Bottom Flap Triangle of Envelope -->
+          <div class="absolute bottom-0 left-0 right-0 h-[175px] bg-[#431420] z-20" style="clip-path: polygon(0 100%, 50% 28%, 100% 100%);"></div>
+          
+          <!-- Top Triangle Flap (Folds open in 3D) -->
+          <div id="envelopeFlap" class="envelope-flap absolute top-0 left-0 right-0 h-[180px] bg-[#4C1724] z-30 shadow-md" style="clip-path: polygon(0 0, 100% 0, 50% 100%);"></div>
+
+          <!-- 3D GOLDEN WAX SEAL WITH "A & S" (ARFIYA & SAFWAN) -->
+          <div class="absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 flex flex-col items-center">
+            <div id="waxSealBtn" onclick="openEnvelope()" class="wax-seal seal-pulse flex items-center justify-center group" title="Click to open with smooth animation & music">
+              <!-- Wax Melt Edge Contour -->
+              <div class="wax-seal-inner">
+                <!-- User requested letters A and S -->
+                <span class="font-cinzel text-lg font-black text-[#5C3F08] tracking-tight drop-shadow-sm group-hover:scale-110 transition-transform">
+                  A & S
+                </span>
+              </div>
+            </div>
+            
+            <!-- Tap to Open Pill -->
+            <span id="tapLabel" class="mt-2.5 text-[10px] font-sans font-semibold text-amber-200/95 tracking-wider uppercase bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm shadow-md animate-bounce cursor-pointer" onclick="openEnvelope()">
+              Tap wax seal to open
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Caption underneath envelope -->
+      <p class="font-script text-2xl text-[#6E2638] mt-4">
+        A blessed wedding in Mangalore
+      </p>
+      
+      <!-- Scroll To Unfold Indicator -->
+      <a href="#mainInvite" class="mt-2 flex flex-col items-center text-[#8C6A2B] hover:text-[#531B29] transition-colors">
+        <span class="font-cinzel text-[10px] tracking-[0.25em] uppercase font-bold">Scroll to unfold</span>
+        <svg class="w-4 h-4 mt-1 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+      </a>
+
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 2. UNFOLDED DECKLE PAPER INVITATION CARD -->
+    <!-- ============================================== -->
+    <section id="mainInvite" class="w-full my-6 flex flex-col items-center transition-all duration-700">
+      
+      <div class="deckle-paper w-full max-w-[340px] sm:max-w-[380px] p-6 sm:p-8 text-center text-[#2D1B22] relative overflow-hidden">
+        
+        <!-- Top Floral Bouquet Accent (matching frame 010) -->
+        <div class="absolute -top-1 -right-1 w-20 h-20 pointer-events-none opacity-85">
+          <svg viewBox="0 0 100 100" class="w-full h-full">
+            <g transform="translate(60, 25)">
+              <circle cx="0" cy="0" r="16" fill="#531B29"/>
+              <circle cx="0" cy="0" r="5" fill="#D4AF37"/>
+              <path d="M-10,-5 Q-25,-15 -20,5 Q-5,0 -10,-5" fill="#7B8A6F"/>
+              <circle cx="-14" cy="12" r="8" fill="#F4EFEA" stroke="#C9A050" stroke-width="1"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Bismillah Header -->
+        <p class="font-cormorant italic text-xs sm:text-sm text-stone-600 mb-1 leading-snug">
+          In the name of Almighty, The Most Beneficent, The Most Merciful
+        </p>
+        <p class="font-cormorant text-xs text-[#8C6A2B] font-medium tracking-wide uppercase mb-3">
+          With gratitude to Allah and the blessings of our families
+        </p>
+
+        <!-- Host Parents -->
+        <div class="my-3 py-2 border-y border-[#C9A050]/20">
+          <h2 class="font-cinzel text-xs sm:text-sm font-bold text-[#531B29] uppercase tracking-wider">
+            Mrs. & Mr. Haji Abdul Rasheed
+          </h2>
+          <p class="font-sans text-[10px] text-stone-500 uppercase tracking-widest mt-0.5">
+            C. M. Manzil, 7th Block, Krishnapura
+          </p>
+          <p class="font-cormorant italic text-xs text-stone-600 mt-2 leading-relaxed">
+            request the pleasure of your company as they celebrate the wedding ceremony of their beloved daughter
+          </p>
+        </div>
+
+        <!-- Bride Name -->
+        <div class="my-3">
+          <h3 class="font-cormorant text-4xl sm:text-5xl font-bold text-[#531B29] tracking-tight">
+            Arfiya
+          </h3>
+          <p class="font-cormorant text-sm italic text-stone-600">(Khathija Arfiya)</p>
+          <p class="font-sans text-[9px] text-stone-500 uppercase tracking-wider mt-0.5">
+            Daughter of Mrs. & Mr. Haji Abdul Rasheed<br>
+            Grand D/o. Mohammed (Krishnapura) & Abdul Rahman (Angaragundi)
+          </p>
+        </div>
+
+        <!-- Ampersand -->
+        <div class="flex items-center justify-center gap-3 my-2 text-[#8C6A2B]">
+          <div class="h-[1px] w-10 bg-[#C9A050]/40"></div>
+          <span class="font-script text-2xl">&</span>
+          <div class="h-[1px] w-10 bg-[#C9A050]/40"></div>
+        </div>
+
+        <!-- Groom Name -->
+        <div class="my-3">
+          <h3 class="font-cormorant text-4xl sm:text-5xl font-bold text-[#531B29] tracking-tight">
+            Safwan
+          </h3>
+          <p class="font-cormorant text-sm italic text-stone-600">(Mahammed Safwan)</p>
+          <p class="font-sans text-[9px] text-stone-500 uppercase tracking-wider mt-0.5">
+            Son of Mrs. & Mr. Abdul Rehaman<br>
+            <span class="text-stone-400">Kairu Manzil, Bajal Padpu, Mangalore</span>
+          </p>
+        </div>
+
+        <!-- Date & Location Banner -->
+        <div class="mt-4 pt-3 border-t border-[#C9A050]/30 flex flex-col items-center">
+          <p class="font-cinzel text-xs font-bold text-stone-800 tracking-widest uppercase">
+            Sunday, 29 November 2026
+          </p>
+          <p class="font-sans text-[10px] text-[#7B8A6F] font-semibold uppercase tracking-wider mt-0.5">
+            KMS Convention Centre • Mangalore
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 3. CALENDAR SECTION (EXACT AS IN FRAME 014) -->
+    <!-- ============================================== -->
+    <section class="w-full my-6 flex flex-col items-center">
+      
+      <div class="deckle-paper w-full max-w-[340px] sm:max-w-[380px] p-6 text-center text-[#2D1B22] relative">
+        
+        <!-- Floral Sprig Accent in Corner -->
+        <div class="absolute -bottom-2 -right-2 w-16 h-16 pointer-events-none opacity-80">
+          <svg viewBox="0 0 100 100" class="w-full h-full">
+            <circle cx="50" cy="50" r="14" fill="#531B29"/>
+            <circle cx="50" cy="50" r="4" fill="#D4AF37"/>
+            <path d="M40,30 Q20,10 10,40" fill="none" stroke="#7B8A6F" stroke-width="2"/>
+          </svg>
+        </div>
+
+        <!-- Calendar Month Header -->
+        <h4 class="font-cinzel text-sm sm:text-base font-bold text-[#531B29] tracking-[0.25em] uppercase mb-3">
+          November 2026
+        </h4>
+
+        <!-- Weekday Headers -->
+        <div class="grid grid-cols-7 gap-1 text-[11px] font-cinzel font-bold text-[#8C6A2B] pb-2 border-b border-[#C9A050]/20 mb-2">
+          <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+        </div>
+
+        <!-- November 2026 Grid (Starts on Sunday Nov 1) -->
+        <div class="grid grid-cols-7 gap-1 text-xs font-sans text-stone-700 items-center justify-center mb-4">
+          <span class="py-1">1</span>
+          <span class="py-1">2</span>
+          <span class="py-1">3</span>
+          <span class="py-1">4</span>
+          <span class="py-1">5</span>
+          <span class="py-1">6</span>
+          <span class="py-1">7</span>
+
+          <span class="py-1">8</span>
+          <span class="py-1">9</span>
+          <span class="py-1">10</span>
+          <span class="py-1">11</span>
+          <span class="py-1">12</span>
+          <span class="py-1">13</span>
+          <span class="py-1">14</span>
+
+          <span class="py-1">15</span>
+          <span class="py-1">16</span>
+          <span class="py-1">17</span>
+          <span class="py-1">18</span>
+          <span class="py-1">19</span>
+          <span class="py-1">20</span>
+          <span class="py-1">21</span>
+
+          <span class="py-1">22</span>
+          <span class="py-1">23</span>
+          <span class="py-1">24</span>
+          <span class="py-1">25</span>
+          <span class="py-1">26</span>
+          <span class="py-1">27</span>
+          <span class="py-1">28</span>
+
+          <!-- CIRCLED 29 IN OXBLOOD (Exact visual from frame 014) -->
+          <div class="flex items-center justify-center">
+            <span class="w-7 h-7 rounded-full bg-[#531B29] text-amber-200 font-bold flex items-center justify-center shadow-md ring-2 ring-amber-300">
+              29
+            </span>
+          </div>
+          <span class="py-1">30</span>
+          <span class="text-stone-300 py-1"></span>
+          <span class="text-stone-300 py-1"></span>
+          <span class="text-stone-300 py-1"></span>
+          <span class="text-stone-300 py-1"></span>
+          <span class="text-stone-300 py-1"></span>
+        </div>
+
+        <p class="font-cormorant italic text-xs text-stone-500 mb-3">
+          (19 Jumad-Ul-Akhar, 1448 AH)
+        </p>
+
+        <!-- ADD TO CALENDAR LINK (Exact as in frame 014) -->
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+of+Khathija+Arfiya+%26+Mahammed+Safwan&dates=20261129T060000Z/20261129T083000Z&details=Wedding+Ceremony+at+KMS+Convention+Centre%2C+Kamblapadavu%2C+Konaje+-+Mangalore.+Nikah+at+11%3A30+AM%2C+Lunch+till+2%3A00+PM.&location=KMS+Convention+Centre%2C+Kamblapadavu%2C+Konaje%2C+Mangalore" target="_blank" rel="noopener noreferrer" class="inline-block font-cinzel text-xs font-bold text-[#8C6A2B] hover:text-[#531B29] tracking-widest uppercase border-b border-[#C9A050] pb-0.5 hover:border-[#531B29] transition-all">
+          ADD TO CALENDAR
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 4. VENUE CARD (EXACT AS IN FRAME 014) -->
+    <!-- ============================================== -->
+    <section class="w-full my-6 flex flex-col items-center">
+      
+      <div class="deckle-paper w-full max-w-[340px] sm:max-w-[380px] p-6 text-center text-[#2D1B22] relative overflow-hidden">
+        
+        <!-- Arched Top Oxblood Envelope Motif Behind Card -->
+        <div class="w-full h-12 -mt-6 -mx-6 bg-[#531B29] rounded-b-2xl mb-4 flex items-center justify-center">
+          <span class="font-cinzel text-[10px] font-bold text-amber-200 tracking-widest uppercase">
+            Ceremony Location
+          </span>
+        </div>
+
+        <p class="font-cinzel text-xs tracking-widest text-[#8C6A2B] uppercase font-semibold mb-1">
+          NIKAH & WEDDING RECEPTION
+        </p>
+        <h4 class="font-cormorant text-2xl sm:text-3xl font-bold text-[#531B29] mb-1">
+          KMS Convention Centre
+        </h4>
+        <p class="font-sans text-[11px] text-[#7B8A6F] font-semibold uppercase tracking-wider mb-4">
+          Kamblapadavu, Konaje - Mangalore
+        </p>
+
+        <!-- Illustration of the Venue (Frame 014 style) -->
+        <div class="w-full h-36 rounded-xl overflow-hidden border border-[#C9A050]/40 shadow-inner mb-4 relative bg-gradient-to-b from-[#EAE2D5] to-[#D5C7B2] flex items-center justify-center">
+          <svg viewBox="0 0 240 140" class="w-full h-full opacity-90">
+            <rect width="240" height="140" fill="#E8DFD1"/>
+            <path d="M0,110 Q60,80 120,105 T240,95 L240,140 L0,140 Z" fill="#C2B299" opacity="0.5"/>
+            <!-- Center Convention Hall -->
+            <rect x="75" y="65" width="90" height="55" fill="#FFFDF9" stroke="#9E896E" stroke-width="1.2"/>
+            <path d="M68,65 L120,35 L172,65 Z" fill="#531B29"/>
+            <circle cx="120" cy="50" r="6" fill="#C9A050"/>
+            <rect x="108" y="90" width="24" height="30" rx="12" fill="#531B29"/>
+            <!-- Palm trees on sides -->
+            <path d="M30,130 Q35,80 25,50 Q38,45 50,55 M25,50 Q28,35 15,40 M25,50 Q12,55 5,65" fill="none" stroke="#4E5A44" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M205,130 Q200,80 210,50 Q198,45 185,55 M210,50 Q215,35 225,40 M210,50 Q225,55 235,65" fill="none" stroke="#4E5A44" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <div class="absolute bottom-1 right-2 bg-white/80 px-2 py-0.5 rounded text-[9px] font-sans text-stone-600">
+            KMS Convention
+          </div>
+        </div>
+
+        <!-- Get Directions Button -->
+        <a href="https://www.google.com/maps/search/?api=1&query=KMS+Convention+Centre+Kamblapadavu+Konaje+Mangalore" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#531B29] hover:bg-[#38101A] text-amber-200 text-xs font-sans font-semibold tracking-wider uppercase shadow-md transition-all">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Get Directions On Google Maps
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 5. ITINERARY TIMELINE CARD (EXACT AS IN FRAME 018) -->
+    <!-- ============================================== -->
+    <section class="w-full my-6 flex flex-col items-center">
+      
+      <!-- Deep Oxblood Vertical Timeline Card -->
+      <div class="w-full max-w-[340px] sm:max-w-[380px] bg-[#531B29] rounded-2xl p-6 text-white shadow-2xl border border-[#7D293E]/60 relative overflow-hidden">
+        
+        <!-- Thin Inner Gold Border (Frame 018) -->
+        <div class="absolute inset-2.5 rounded-xl border border-[#C9A050]/40 pointer-events-none"></div>
+
+        <p class="font-cinzel text-[11px] font-bold text-amber-300 tracking-[0.25em] uppercase text-center mb-6">
+          Wedding Itinerary
+        </p>
+
+        <!-- Vertical Timeline Line -->
+        <div class="relative flex flex-col gap-6 pl-4 pr-2">
+          
+          <!-- Central Gold Vertical Line -->
+          <div class="absolute left-[70px] top-2 bottom-4 w-[1px] bg-gradient-to-b from-[#C9A050] via-amber-200 to-[#C9A050]/30"></div>
+
+          <!-- Event 1: Arrival & Welcome -->
+          <div class="flex items-center gap-5 relative z-10">
+            <span class="font-cormorant text-base font-bold text-amber-200 w-12 text-right">11:00</span>
+            <div class="w-5 h-5 rounded-full bg-[#531B29] border-2 border-[#C9A050] flex items-center justify-center text-[10px] shrink-0 text-amber-300 shadow">
+              ✦
+            </div>
+            <div class="text-left">
+              <h5 class="font-cinzel text-xs font-bold text-white uppercase tracking-wider">Arrival & Welcome</h5>
+              <p class="font-cormorant italic text-[11px] text-stone-300">Guests Assemble at the Hall</p>
+            </div>
+          </div>
+
+          <!-- Event 2: Nikah -->
+          <div class="flex items-center gap-5 relative z-10">
+            <span class="font-cormorant text-base font-bold text-amber-200 w-12 text-right">11:30</span>
+            <div class="w-6 h-6 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center text-[11px] shrink-0 text-[#531B29] font-bold shadow">
+              💍
+            </div>
+            <div class="text-left">
+              <h5 class="font-cinzel text-xs font-bold text-amber-200 uppercase tracking-wider">Nikah Ceremony</h5>
+              <p class="font-cormorant italic text-[11px] text-stone-300">The Sacred Marriage Solemnization</p>
+            </div>
+          </div>
+
+          <!-- Event 3: Lunch -->
+          <div class="flex items-center gap-5 relative z-10">
+            <span class="font-cormorant text-base font-bold text-amber-200 w-12 text-right">12:00</span>
+            <div class="w-5 h-5 rounded-full bg-[#531B29] border-2 border-[#C9A050] flex items-center justify-center text-[10px] shrink-0 text-amber-300 shadow">
+              ☕
+            </div>
+            <div class="text-left">
+              <h5 class="font-cinzel text-xs font-bold text-white uppercase tracking-wider">Wedding Feast (Lunch)</h5>
+              <p class="font-cormorant italic text-[11px] text-stone-300">After Nikah till 2:00 PM</p>
+            </div>
+          </div>
+
+          <!-- Event 4: Blessings & Photos -->
+          <div class="flex items-center gap-5 relative z-10">
+            <span class="font-cormorant text-base font-bold text-amber-200 w-12 text-right">1:30</span>
+            <div class="w-5 h-5 rounded-full bg-[#531B29] border-2 border-[#C9A050] flex items-center justify-center text-[10px] shrink-0 text-amber-300 shadow">
+              📸
+            </div>
+            <div class="text-left">
+              <h5 class="font-cinzel text-xs font-bold text-white uppercase tracking-wider">Portraits & Greetings</h5>
+              <p class="font-cormorant italic text-[11px] text-stone-300">Blessings with Family & Friends</p>
+            </div>
+          </div>
+
+          <!-- Event 5: Farewell -->
+          <div class="flex items-center gap-5 relative z-10">
+            <span class="font-cormorant text-base font-bold text-amber-200 w-12 text-right">2:00</span>
+            <div class="w-5 h-5 rounded-full bg-[#531B29] border-2 border-[#C9A050] flex items-center justify-center text-[10px] shrink-0 text-amber-300 shadow">
+              🤲
+            </div>
+            <div class="text-left">
+              <h5 class="font-cinzel text-xs font-bold text-white uppercase tracking-wider">Farewell & Du'as</h5>
+              <p class="font-cormorant italic text-[11px] text-stone-300">With Warm Hearts and Memories</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 6. COUNTDOWN SECTION (EXACT AS IN FRAME 018) -->
+    <!-- ============================================== -->
+    <section class="w-full my-6 flex flex-col items-center">
+      
+      <div class="deckle-paper w-full max-w-[340px] sm:max-w-[380px] p-6 text-center text-[#2D1B22] relative">
+        
+        <!-- Wax Seal Accent on side with A & S -->
+        <div class="absolute -top-3 -right-3 wax-seal scale-75 pointer-events-none">
+          <div class="wax-seal-inner text-xs font-bold text-[#5C3F08]">A & S</div>
+        </div>
+
+        <p class="font-cormorant text-xs font-medium text-[#8C6A2B] uppercase tracking-[0.2em] mb-1">
+          With Almighty's Grace
+        </p>
+        <h4 class="font-cormorant text-2xl sm:text-3xl font-bold text-[#531B29] tracking-wider uppercase mb-5">
+          Until Our Wedding
+        </h4>
+
+        <!-- Live Digits (Frame 018 visual) -->
+        <div class="flex items-center justify-center gap-2 sm:gap-3 text-[#531B29]">
+          <div class="flex flex-col items-center">
+            <span id="t-days" class="font-cormorant text-3xl sm:text-4xl font-bold leading-none">--</span>
+            <span class="font-cinzel text-[9px] uppercase tracking-wider text-stone-500 mt-1">Days</span>
+          </div>
+          <span class="font-cormorant text-2xl font-bold text-[#C9A050] mb-3">:</span>
+          <div class="flex flex-col items-center">
+            <span id="t-hours" class="font-cormorant text-3xl sm:text-4xl font-bold leading-none">--</span>
+            <span class="font-cinzel text-[9px] uppercase tracking-wider text-stone-500 mt-1">Hours</span>
+          </div>
+          <span class="font-cormorant text-2xl font-bold text-[#C9A050] mb-3">:</span>
+          <div class="flex flex-col items-center">
+            <span id="t-mins" class="font-cormorant text-3xl sm:text-4xl font-bold leading-none">--</span>
+            <span class="font-cinzel text-[9px] uppercase tracking-wider text-stone-500 mt-1">Mins</span>
+          </div>
+          <span class="font-cormorant text-2xl font-bold text-[#C9A050] mb-3">:</span>
+          <div class="flex flex-col items-center">
+            <span id="t-secs" class="font-cormorant text-3xl sm:text-4xl font-bold leading-none text-[#8C6A2B]">--</span>
+            <span class="font-cinzel text-[9px] uppercase tracking-wider text-stone-500 mt-1">Secs</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 7. BLESSINGS & FAMILY (EXACT AS IN FRAME 022) -->
+    <!-- ============================================== -->
+    <section class="w-full my-6 flex flex-col items-center">
+      
+      <!-- Oxblood Card (Frame 022) -->
+      <div class="w-full max-w-[340px] sm:max-w-[380px] bg-[#531B29] rounded-2xl p-6 sm:p-7 text-center text-white shadow-xl relative overflow-hidden border border-[#7D293E]/50">
+        
+        <!-- Gold Diamond Icon (Frame 022) -->
+        <div class="w-3.5 h-3.5 rotate-45 border border-amber-300 mx-auto mb-3"></div>
+
+        <h4 class="font-cinzel text-sm sm:text-base font-bold text-amber-200 tracking-[0.2em] uppercase mb-2">
+          Your Presence Is A Blessing
+        </h4>
+
+        <p class="font-cormorant italic text-xs sm:text-sm text-stone-200 leading-relaxed max-w-[270px] mx-auto mb-4">
+          "Your prayers and presence are the greatest gift to us as we begin this sacred new journey together."
+        </p>
+
+        <!-- Wax Seal Badge on Corner (Frame 022) with A & S -->
+        <div class="absolute bottom-2 right-2 wax-seal scale-[0.6] pointer-events-none">
+          <div class="wax-seal-inner text-xs font-bold text-[#5C3F08]">A & S</div>
+        </div>
+
+        <div class="pt-3 border-t border-[#C9A050]/30 text-[10px] text-stone-300">
+          <span class="font-cinzel font-bold text-amber-300 uppercase block mb-0.5">Sharing Happiness With</span>
+          Mohammed Areef • Abdul Ansar • Hasan Azeem<br>
+          CM Family & Badriya Family • Relatives & Friends
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================== -->
+    <!-- 8. ORDER CUSTOM WEBSITES VIA @HAMPER.SPOT -->
+    <!-- ============================================== -->
+    <section class="w-full my-8 flex flex-col items-center text-center">
+      
+      <div class="deckle-paper w-full max-w-[340px] sm:max-w-[380px] p-6 bg-gradient-to-b from-[#FFFDF9] to-[#FAF5ED] border-2 border-[#C9A050]/50 shadow-lg">
+        
+        <p class="font-cormorant italic text-xs text-stone-600 mb-1">
+          Designed & Crafted with Love
+        </p>
+        <h4 class="font-cinzel text-xs sm:text-sm font-bold text-[#531B29] tracking-wider uppercase mb-1">
+          Want A Custom Wedding Website Like This?
+        </h4>
+        <p class="font-sans text-[10px] text-stone-500 max-w-[260px] mx-auto mb-4">
+          Order bespoke scrolling wedding websites with wax seals, digital video invites, and luxury gift hampers.
+        </p>
+
+        <a href="https://www.instagram.com/hamper.spot?vrfl=aG1zZnZma3k3bDJi&utm_source=qr" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#531B29] hover:bg-[#38101A] text-amber-200 font-sans font-bold text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all">
+          <svg class="w-4 h-4 text-amber-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Order on Instagram (@hamper.spot)
+        </a>
+
+        <div class="mt-4 pt-3 border-t border-stone-200 text-[10px] text-stone-400 font-sans">
+          © 2026 The Wedding of Arfiya & Safwan
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ============================================== -->
+  <!-- JAVASCRIPT: SMOOTH OPENING, AUDIO & TIMER -->
+  <!-- ============================================== -->
+  <script>
+    const audio = document.getElementById('weddingAudio');
+    let isPlaying = false;
+
+    // 1. BUTTERY-SMOOTH WAX SEAL & ENVELOPE OPENING INTERACTION
+    function openEnvelope() {
+      const wrapper = document.getElementById('envelopeWrapper');
+      const seal = document.getElementById('waxSealBtn');
+      const label = document.getElementById('tapLabel');
+      
+      // Start smooth music playback automatically on user interaction
+      startMusic();
+
+      // Step 1: Smooth seal break & flap rotation
+      wrapper.classList.add('envelope-open');
+      label.textContent = 'Opening... ✨';
+
+      // Step 2: Smooth gliding scroll down to the unfolded invitation
+      setTimeout(() => {
+        document.getElementById('mainInvite').scrollIntoView({ behavior: 'smooth' });
+        label.textContent = 'Opened ✓';
+      }, 750);
+    }
+
+    // 2. AUDIO PLAYBACK WITH REAL SONG FROM REEL
+    function startMusic() {
+      if (audio && audio.paused) {
+        audio.play().then(() => {
+          isPlaying = true;
+          updateAudioUI(true);
+        }).catch(err => {
+          console.log('Audio autoplay prevented, ready on click:', err);
+        });
+      }
+    }
+
+    function toggleAudio() {
+      if (!audio) return;
+      if (audio.paused) {
+        audio.play().then(() => {
+          isPlaying = true;
+          updateAudioUI(true);
+        });
+      } else {
+        audio.pause();
+        isPlaying = false;
+        updateAudioUI(false);
+      }
+    }
+
+    function updateAudioUI(playing) {
+      const dot = document.getElementById('musicDot');
+      const status = document.getElementById('musicStatus');
+      const eq = document.getElementById('eqBars');
+
+      if (playing) {
+        dot.classList.add('hidden');
+        eq.classList.remove('hidden');
+        status.textContent = 'Music: Playing';
+        status.classList.add('text-amber-800');
+      } else {
+        dot.classList.remove('hidden');
+        eq.classList.add('hidden');
+        status.textContent = 'Music: Off';
+        status.classList.remove('text-amber-800');
+      }
+    }
+
+    // 3. COUNTDOWN TIMER TO NOV 29, 2026
+    const targetWedding = new Date('2026-11-29T11:30:00+05:30');
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = targetWedding - now;
+
+      if (diff > 0) {
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / 1000 / 60) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('t-days').textContent = d;
+        document.getElementById('t-hours').textContent = h;
+        document.getElementById('t-mins').textContent = m;
+        document.getElementById('t-secs').textContent = s;
+      }
+    }
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
+
+</body>
+</html>
